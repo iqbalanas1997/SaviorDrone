@@ -1,13 +1,19 @@
-import React from "react";
-import Switch from "./Components/Switch";
-import "./App.css";
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <Switch />
-    </div>
-  );
+//<Switch />;
+export class App extends Component {
+  render() {
+    return (
+      <Map google={this.props.google} zoom={14}>
+        <Marker onClick={this.onMarkerClick} name={"Current location"} />
+
+        <InfoWindow onClose={this.onInfoWindowClose}></InfoWindow>
+      </Map>
+    );
+  }
 }
 
-export default App;
+export default GoogleApiWrapper({
+  apiKey: "AIzaSyBFAs2DVLRKt_tbJinn7Ox213xfMCTYqX4",
+})(App);
