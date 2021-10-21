@@ -1,13 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
+var curLat;
+var curLng;
 const mapStyles = {
   map: {
     position: "absolute",
-    width: "100%",
-    height: "100%",
+    width: "50%",
+    height: "50%",
   },
 };
+
+
 
 export class CurrentLocation extends React.Component {
   constructor(props) {
@@ -41,8 +44,16 @@ export class CurrentLocation extends React.Component {
     if (map) {
       let center = new maps.LatLng(current.lat, current.lng);
       map.panTo(center);
+      curLat = current.lat;
+      curLng = current.lng;
     }
   }
+
+  getCurrentLocation() {
+    var lat = CurrentLocation.recenterMap.current.lat;
+    var lng = CurrentLocation.recenterMap.current.lng;
+  }
+
   componentDidMount() {
     if (this.props.centerAroundCurrentLocation) {
       if (navigator && navigator.geolocation) {
@@ -129,3 +140,4 @@ CurrentLocation.defaultProps = {
 };
 
 export default CurrentLocation;
+export { curLng, curLat };
